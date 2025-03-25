@@ -11,6 +11,8 @@ export class Task {
     #importance;
     #tagList = new Set();
 
+    get data() { return { title: this.title, description: this.description, dueDate: this.dueDate, importance: this.importance, tagList: this.tagList } };
+
     constructor({ title, description, dueDate, importance, tagList=[] }) {
         this.#title = title;
         this.description = description;
@@ -34,7 +36,7 @@ export class Task {
         this.#importance = value;
     }
 
-    get tagList() { return this.#tagList }
+    get tagList() { return [...this.#tagList] }
     hasTag(tag) { return this.#tagList.has(tag) }
     addTag(newTag) { this.#tagList.add(newTag) }
     removeTag(tag) { this.#tagList.delete(tag) }
