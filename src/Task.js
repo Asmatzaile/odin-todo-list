@@ -10,11 +10,13 @@ export class Task {
     #dueDate;
     #importance;
     #tagList = new Set();
+    #isDone;
 
-    get data() { return { title: this.title, description: this.description, dueDate: this.dueDate, importance: this.importance, tagList: this.tagList } };
+    get data() { return { title: this.title, description: this.description, dueDate: this.dueDate, importance: this.importance, tagList: this.tagList, isDone: this.isDone } };
 
-    constructor({ title, description, dueDate, importance, tagList=[] }) {
-        this.#title = title;
+    constructor({ title, isDone=false, description, dueDate, importance, tagList=[], }) {
+        this.title = title;
+        this.isDone = isDone;
         this.description = description;
         this.dueDate = dueDate;
         this.importance = importance;
@@ -23,6 +25,9 @@ export class Task {
 
     get title() { return this.#title }
     set title(value) { this.#title = value }
+
+    get isDone() { return this.#isDone }
+    set isDone(value) { this.#isDone = value }
 
     get description() { return this.#description }
     set description(value) { this.#description = value }
