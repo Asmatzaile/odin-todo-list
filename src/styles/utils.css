@@ -1,0 +1,70 @@
+.overflow-auto {
+    overflow: auto;
+}
+
+.no-scrollbar {
+    scrollbar-width: none;
+}
+
+.h-25 {
+    height: 100px;
+}
+.h-screen {  	
+    height: 100vh;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.flex-auto {
+    flex: 1 1 auto;
+}
+
+.flex-none {
+    flex: none;
+}
+
+.p-4 {
+    padding: 1rem;
+}
+
+.gap-4 {
+    gap: 1rem;
+}
+
+.text-4xl {
+    font-size: 2.25rem;
+}
+
+.font-bold {
+    font-weight: 700;
+}
+
+.bg-white {
+    background-color: white;
+}  
+
+.bg-yellow {
+    background-color: var(--yellow);
+}
+
+.border-2 {
+    border-width: 2px;
+}
+
+.border-black {
+    border-color: black;
+}
+
+.border-solid {
+    border-style: solid;
+}
+
+.shadow-md {
+    filter: drop-shadow(8px 8px 0 black); /* box-shadow clips on list */
+}

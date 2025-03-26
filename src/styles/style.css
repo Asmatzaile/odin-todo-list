@@ -1,0 +1,7 @@
+@import url(normalize.css);
+@import url(utils.css);
+
+:root {
+    --yellow: #FFF183;
+    font-family: Inter, sans-serif;
+}

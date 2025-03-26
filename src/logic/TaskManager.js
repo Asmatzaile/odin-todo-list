@@ -1,4 +1,5 @@
 import { TaskStorer } from "./TaskStorer";
+import { Task } from "./Task";
 
 export class TaskManager {
     #tasks = new Set();
@@ -6,16 +7,24 @@ export class TaskManager {
     constructor() {
         const loadedTasks = TaskStorer.load();
         if (loadedTasks) loadedTasks.forEach(task => this.add(task));
+        const manager = this;
+        document.addEventListener('taskupdate', manager.save.bind(manager));
+    }
+
+    save() {
+        TaskStorer.store(this.tasks);
+        document.dispatchEvent(new Event('save'));
     }
 
     add(task) {
+        task = task instanceof Task ? task : new Task(task);
         this.#tasks.add(task);
-        TaskStorer.store(this.#tasks);
+        this.save();
     }
 
     delete(task) {
         this.#tasks.delete(task);
-        TaskStorer.store(this.#tasks);
+        this.save();
     }
 
     getTasksWithTag(tag) {
