@@ -6,8 +6,9 @@
     "deploy": "npm-run-all deploy:*",
       "deploy:makebranch": "git checkout -B gh-pages main",
       "deploy:commit": "git checkout gh-pages && git add dist -f && git commit -m 'Deployment Commit'",
-      "deploy:push": "git checkout gh-pages && git subtree push --prefix dist origin gh-pages",
-    "predeploy": "npm run build"
+      "deploy:push": "git checkout gh-pages && git push origin --delete gh-pages && git subtree push --prefix dist origin gh-pages",
+    "predeploy": "git switch main && npm run build",
+    "postdeploy": "git switch main"
   },
   "devDependencies": {
     "css-loader": "^7.1.2",
