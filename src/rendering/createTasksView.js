@@ -1,33 +1,25 @@
-const createDoneCheckbox = task => {
-    const doneCheckbox = document.createElement('input');
-    doneCheckbox.setAttribute('type', 'checkbox');
-    doneCheckbox.checked = task.isDone;
-    doneCheckbox.onchange = (e) => task.isDone = e.target.checked;
-    return doneCheckbox;
-}
+import { Checkbox } from "./Checkbox";
+import { TaskItem } from "./TaskItem";
 
 const createTitleEl = content => {
     const titleEl = document.createElement('h3');
-    titleEl.classList = "text-4xl font-bold"
     titleEl.textContent = content;
     return titleEl;
 }
 
 const createShortTaskEl = task => {
-    const taskEl = document.createElement('div');
-    taskEl.classList = "flex-none flex gap-4 bg-white p-4 border-2 border-black border-solid h-25"
+    const taskEl = TaskItem();
     const titleEl = createTitleEl(task.title);
-    const doneCheckbox = createDoneCheckbox(task);
+    const doneCheckbox = Checkbox({ checked: task.isDone, onchange: v => task.isDone = v });
  
     taskEl.append(doneCheckbox, titleEl);
     return taskEl;
 }
 
 const createNewTaskWidget = (taskManager) => {
-    const taskEl = document.createElement('div');
-    taskEl.classList = "flex-none flex gap-4 bg-white p-4 border-2 border-black border-solid h-25 shadow-md"
+    const taskEl = TaskItem();
+    taskEl.classList.add("shadow-md")
     const textEl = document.createElement('input');
-    textEl.classList = "text-4xl font-bold"
     const buttonEl = document.createElement('button');
     buttonEl.onclick = () => {
         const title = textEl.value.trim();
