@@ -3,5 +3,7 @@
 
 :root {
     --yellow: #FFF183;
+    --yellow-dark: #464222;
+    --yellow-light: #FFFBD9;
     font-family: Inter, sans-serif;
 }

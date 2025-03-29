@@ -21,6 +21,7 @@ const createNewTaskWidget = (taskManager) => {
     taskEl.classList.add("shadow-md")
     const textEl = document.createElement('input');
     const buttonEl = document.createElement('button');
+    buttonEl.classList = "w-16 h-16"
     buttonEl.onclick = () => {
         const title = textEl.value.trim();
         if (title === "") return;

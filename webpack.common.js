@@ -25,8 +25,12 @@ module.exports = {
                 loader: "html-loader",
             },
             { // load images
-                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                test: /\.(png|jpg|jpeg|gif)$/i,
                 type: "asset/resource",
+            },
+            { // treat SVGs as plain text
+                test: /\.svg$/i,
+                type: "asset/source",
             },
             { // load fonts
                 test: /\.(woff|woff2|eot|ttf|otf)$/i,
