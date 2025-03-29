@@ -69,6 +69,10 @@
     font-weight: 700;
 }
 
+.line-through {
+    text-decoration-line: line-through;
+}
+
 .bg-white {
     background-color: white;
 }  
@@ -80,7 +84,7 @@
     background-color: var(--yellow-dark);
 }
 .bg-yellow-light {
-    background-color: var(--yelow-light);
+    background-color: var(--yellow-light);
 }
 
 .text-yellow-dark {
@@ -112,7 +116,7 @@
 }
 
 .shadow-md {
-    filter: drop-shadow(8px 8px 0 black); /* box-shadow clips on list */
+    filter: drop-shadow(8px 8px 0 currentColor); /* box-shadow clips on list */
 }
 
 .cursor-pointer {

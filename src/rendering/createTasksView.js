@@ -8,7 +8,7 @@ const createTitleEl = content => {
 }
 
 const createShortTaskEl = task => {
-    const taskEl = TaskItem();
+    const taskEl = TaskItem({isDone: task.isDone});
     const titleEl = createTitleEl(task.title);
     const doneCheckbox = Checkbox({ checked: task.isDone, onchange: v => task.isDone = v });
  
@@ -17,7 +17,7 @@ const createShortTaskEl = task => {
 }
 
 const createNewTaskWidget = (taskManager) => {
-    const taskEl = TaskItem();
+    const taskEl = TaskItem({isDone: false}); // ofc it's the button. api could be better
     taskEl.classList.add("shadow-md")
     const textEl = document.createElement('input');
     const buttonEl = document.createElement('button');
@@ -32,11 +32,24 @@ const createNewTaskWidget = (taskManager) => {
     return taskEl;
 }
 
+const createSubTaskList = (titleText, taskElements) => {
+    const subTaskListDiv = document.createElement('div');
+    const taskElsContainer = document.createElement('div');
+    taskElsContainer.classList = "flex flex-col gap-4";
+    taskElsContainer.append(...taskElements);
+    const title = document.createElement('h2');
+    title.textContent = titleText;
+    subTaskListDiv.append(title, taskElsContainer);
+    return subTaskListDiv;
+}
+
 const createTaskList = (taskManager) => {
-    const taskEls = [...taskManager.tasks].map(createShortTaskEl);
+    const pendingTaskEls = [...taskManager.tasks].filter(task => !task.isDone).map(createShortTaskEl);
+    const doneTaskEls = [...taskManager.tasks].filter(task => task.isDone).map(createShortTaskEl);
     const taskListDiv = document.createElement('div');
-    taskListDiv.classList = "flex-auto overflow-auto no-scrollbar flex flex-col gap-4 shadow-md";
-    taskListDiv.append(...taskEls);
+    taskListDiv.classList = "flex-auto overflow-auto no-scrollbar flex flex-col gap-4";
+    if (pendingTaskEls.length !== 0) taskListDiv.append(createSubTaskList('to do', pendingTaskEls));
+    if (doneTaskEls.length !== 0) taskListDiv.append(createSubTaskList('done', doneTaskEls));
     return taskListDiv;
 }
 
