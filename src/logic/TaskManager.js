@@ -18,6 +18,7 @@ export class TaskManager {
 
     add(task) {
         task = task instanceof Task ? task : new Task(task);
+        task.delete = () => this.delete(task);
         this.#tasks.add(task);
         this.save();
     }
