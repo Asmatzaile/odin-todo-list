@@ -8,6 +8,7 @@ export const Checkbox = ({ checked, onchange }) => {
     checkbox.classList=`appearance-none cursor-pointer w-16 h-16 border-4 border-solid rounded-full ${checked ? "bg-yellow-dark" : ""} `;
     checkbox.checked = checked;
     container.appendChild(checkbox);
+    checkbox.onclick = (e) => e.stopPropagation(); // so that the onclick of the parent is not fired
     checkbox.onchange = (e) => onchange(e.target.checked);
     if (!checked) return container;
     const checkmarkContainer = document.createElement('div');

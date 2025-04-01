@@ -8,8 +8,10 @@ const createTitleEl = content => {
     return titleEl;
 }
 
-const createShortTaskEl = task => {
+const createShortTaskEl = (task, setOpenTask) => {
     const taskEl = TaskItem({isDone: task.isDone});
+    taskEl.classList.add("cursor-pointer");
+    taskEl.onclick = () => setOpenTask(task);
     const titleEl = createTitleEl(task.title);
     const doneCheckbox = Checkbox({ checked: task.isDone, onchange: v => task.isDone = v });
     taskEl.addEventListener("contextmenu", (e) => createTaskContextMenu(e, task));
@@ -44,9 +46,9 @@ const createSubTaskList = (titleText, taskElements) => {
     return subTaskListDiv;
 }
 
-const createTaskList = (taskManager) => {
-    const pendingTaskEls = [...taskManager.tasks].filter(task => !task.isDone).map(createShortTaskEl);
-    const doneTaskEls = [...taskManager.tasks].filter(task => task.isDone).map(createShortTaskEl);
+const createTaskList = (taskManager, setOpenTask) => {
+    const pendingTaskEls = [...taskManager.tasks].filter(task => !task.isDone).map(task => createShortTaskEl(task, setOpenTask));
+    const doneTaskEls = [...taskManager.tasks].filter(task => task.isDone).map(task => createShortTaskEl(task, setOpenTask));
     const taskListDiv = document.createElement('div');
     taskListDiv.classList = "flex-auto overflow-auto no-scrollbar flex flex-col gap-4 relative";
     taskListDiv.id = "tasklist"
@@ -55,10 +57,10 @@ const createTaskList = (taskManager) => {
     return taskListDiv;
 }
 
-export const createTasksView = (taskManager) => {
+export const createTasksView = (taskManager, setOpenTask) => {
     const taskViewDiv = document.createElement('div');
     taskViewDiv.classList = "bg-yellow flex flex-col gap-4 p-4 h-screen";
-    const taskList = createTaskList(taskManager);
+    const taskList = createTaskList(taskManager, setOpenTask);
     const newTaskWidget = createNewTaskWidget(taskManager);
     taskViewDiv.append(taskList, newTaskWidget);
     return taskViewDiv;
