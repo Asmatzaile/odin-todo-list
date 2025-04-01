@@ -1,5 +1,6 @@
 import { Checkbox } from "./Checkbox";
 import { TaskItem } from "./TaskItem";
+import { createTaskContextMenu } from "./TaskContextMenu";
 
 const createTitleEl = content => {
     const titleEl = document.createElement('h3');
@@ -11,7 +12,7 @@ const createShortTaskEl = task => {
     const taskEl = TaskItem({isDone: task.isDone});
     const titleEl = createTitleEl(task.title);
     const doneCheckbox = Checkbox({ checked: task.isDone, onchange: v => task.isDone = v });
- 
+    taskEl.addEventListener("contextmenu", (e) => createTaskContextMenu(e, task));
     taskEl.append(doneCheckbox, titleEl);
     return taskEl;
 }
@@ -21,7 +22,7 @@ const createNewTaskWidget = (taskManager) => {
     taskEl.classList.add("shadow-md")
     const textEl = document.createElement('input');
     const buttonEl = document.createElement('button');
-    buttonEl.classList = "w-16 h-16"
+    buttonEl.classList = "w-16 h-16 border-4 border-solid rounded-sm darkenonhover cursor-pointer"
     buttonEl.onclick = () => {
         const title = textEl.value.trim();
         if (title === "") return;
@@ -47,7 +48,8 @@ const createTaskList = (taskManager) => {
     const pendingTaskEls = [...taskManager.tasks].filter(task => !task.isDone).map(createShortTaskEl);
     const doneTaskEls = [...taskManager.tasks].filter(task => task.isDone).map(createShortTaskEl);
     const taskListDiv = document.createElement('div');
-    taskListDiv.classList = "flex-auto overflow-auto no-scrollbar flex flex-col gap-4";
+    taskListDiv.classList = "flex-auto overflow-auto no-scrollbar flex flex-col gap-4 relative";
+    taskListDiv.id = "tasklist"
     if (pendingTaskEls.length !== 0) taskListDiv.append(createSubTaskList('to do', pendingTaskEls));
     if (doneTaskEls.length !== 0) taskListDiv.append(createSubTaskList('done', doneTaskEls));
     return taskListDiv;

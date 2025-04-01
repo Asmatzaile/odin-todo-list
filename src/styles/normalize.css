@@ -7,3 +7,8 @@
 input, button {
     font: inherit;
 }
+
+button {
+    background-color: white;
+    border: none;
+}

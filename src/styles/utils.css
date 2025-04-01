@@ -1,6 +1,9 @@
 .overflow-auto {
     overflow: auto;
 }
+.overflow-clip {
+    overflow: clip;
+}
 
 .no-scrollbar {
     scrollbar-width: none;
@@ -57,12 +60,22 @@
     padding: 1rem;
 }
 
+.gap-1 {
+    gap: 0.25rem;
+}
 .gap-4 {
     gap: 1rem;
 }
 
+.text-xl {
+    font-size: 1.25rem;
+}
 .text-4xl {
     font-size: 2.25rem;
+}
+
+.text-left {
+    text-align: left;
 }
 
 .font-bold {
@@ -75,7 +88,10 @@
 
 .bg-white {
     background-color: white;
-}  
+}
+.bg-black {
+    background-color: black;
+}
 
 .bg-yellow {
     background-color: var(--yellow);
@@ -114,6 +130,9 @@
 .rounded-full {
     border-radius: 9999px;
 }
+.rounded-sm {
+    border-radius: 0.25rem;
+}
 
 .shadow-md {
     filter: drop-shadow(8px 8px 0 currentColor); /* box-shadow clips on list */
@@ -129,4 +148,8 @@
 
 .appearance-none {
     appearance: none;
+}
+
+.darkenonhover:hover {
+    filter: brightness(0.9);
 }
